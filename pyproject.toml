@@ -1,0 +1,27 @@
+[project]
+name = "neuro-symbolic-vln"
+version = "0.1.0"
+description = "Neuro-Symbolic VLN in 2D MiniGrid"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "minigrid==3.1.0",
+    "numpy>=1.26,<3",
+    "pyperplan==2.1",
+    "pyyaml>=6,<7",
+]
+
+[project.scripts]
+ns-vln = "neuro_symbolic_vln.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+    "mypy>=1.9",
+]
