@@ -52,7 +52,6 @@ def test_adapter_step_returns_task_success() -> None:
     assert pickup.action_succeeded
     assert not pickup.task_success
 
-
     result = adapter.step(PrimitiveAction(name="move_forward"))
 
     print(f"Step result: {result}")
