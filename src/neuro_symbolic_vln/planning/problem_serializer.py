@@ -117,7 +117,3 @@ def serialize_problem(state: CommittedPlanningState, goal_atom: GroundAtom) -> s
 )
 """
     return pddl_sequence
-
-
-# Alias for backwards compatibility
-serialze_problem = serialize_problem
