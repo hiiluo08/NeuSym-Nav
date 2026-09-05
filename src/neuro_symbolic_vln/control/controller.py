@@ -9,7 +9,27 @@ from neuro_symbolic_vln.contracts import (
     PrimitiveAction,
     Provenance,
     StepResult,
+    SymbolicAction,
 )
+
+
+class MiniGridController:
+    """Translates symbolic planner actions into MiniGrid primitive actions."""
+
+    _ACTION_MAP = {
+        "turn-left": "turn_left",
+        "turn-right": "turn_right",
+        "move-forward": "move_forward",
+        "pickup-key": "pickup",
+        "toggle-locked-door": "toggle",
+    }
+
+    def to_primitive(self, action: SymbolicAction) -> str:
+        try:
+            return self._ACTION_MAP[action.name]
+        except KeyError as error:
+            raise ValueError(f"unsupported symbolic action: {action.name}") from error
+
 
 # Episode-local frame: origin at reset, x grows east, y grows south.
 _HEADING_DELTA = {
@@ -72,9 +92,7 @@ class DeadReckoningTracker:
         evidence.extend(self._carrying_evidence(observation, None))
         return tuple(evidence)
 
-    def step(
-        self, action: PrimitiveAction, result: StepResult
-    ) -> tuple[Evidence, ...]:
+    def step(self, action: PrimitiveAction, result: StepResult) -> tuple[Evidence, ...]:
         """Apply action feedback; blocked or failed actions move nothing."""
         pose = self._require_pose()
         observation = result.observation
@@ -86,9 +104,7 @@ class DeadReckoningTracker:
             old_id = pose.location_id
             new_id = self.location_id((new_x, new_y))
             self._pose = LocalPose(new_x, new_y, pose.heading, new_id)
-            evidence.extend(
-                self._robot_at_evidence(observation, old_id, new_id)
-            )
+            evidence.extend(self._robot_at_evidence(observation, old_id, new_id))
             evidence.extend(self._front_cell_evidence(observation))
         elif (
             result.action_succeeded
@@ -98,16 +114,12 @@ class DeadReckoningTracker:
             self._pose = LocalPose(
                 pose.x, pose.y, observation.heading, pose.location_id
             )
-            evidence.extend(
-                self._heading_change_evidence(observation, pose.heading)
-            )
+            evidence.extend(self._heading_change_evidence(observation, pose.heading))
 
         if observation.carried_entity != self._carried:
             old_carried = self._carried
             self._carried = observation.carried_entity
-            evidence.extend(
-                self._carrying_evidence(observation, old_carried)
-            )
+            evidence.extend(self._carrying_evidence(observation, old_carried))
 
         return tuple(evidence)
 
@@ -194,9 +206,7 @@ class DeadReckoningTracker:
             items.append(
                 self._evidence(
                     observation,
-                    GroundAtom(
-                        "front-cell", (pose.location_id, heading, to_id)
-                    ),
+                    GroundAtom("front-cell", (pose.location_id, heading, to_id)),
                     True,
                 )
             )
@@ -211,30 +221,22 @@ class DeadReckoningTracker:
             items.append(
                 self._evidence(
                     observation,
-                    GroundAtom(
-                        "holding", ("robot", old_carried.replace(":", "-"))
-                    ),
+                    GroundAtom("holding", ("robot", old_carried.replace(":", "-"))),
                     False,
                 )
             )
         if carried is None:
             items.append(
-                self._evidence(
-                    observation, GroundAtom("handempty", ("robot",)), True
-                )
+                self._evidence(observation, GroundAtom("handempty", ("robot",)), True)
             )
         else:
             items.append(
-                self._evidence(
-                    observation, GroundAtom("handempty", ("robot",)), False
-                )
+                self._evidence(observation, GroundAtom("handempty", ("robot",)), False)
             )
             items.append(
                 self._evidence(
                     observation,
-                    GroundAtom(
-                        "holding", ("robot", carried.replace(":", "-"))
-                    ),
+                    GroundAtom("holding", ("robot", carried.replace(":", "-"))),
                     True,
                 )
             )
