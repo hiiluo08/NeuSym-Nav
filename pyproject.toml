@@ -58,6 +58,7 @@ disallow_incomplete_defs = true
 module = [
     "minigrid.*",
     "pyperplan.*",
-    "lark.*"
+    "lark.*",
+    "yaml.*",
 ]
 ignore_missing_imports = true
