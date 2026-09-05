@@ -28,5 +28,70 @@ class LockedDoorProbeEnv(MiniGridEnv):
         self.mission = "probe"
 
 
-def make_locked_door_probe_env(key_color: str = "red") -> LockedDoorProbeEnv:
-    return LockedDoorProbeEnv(key_color)
+def make_locked_door_probe_env(
+    key_color: str = "red", agent_dir: int = 0
+) -> LockedDoorProbeEnv:
+    env = LockedDoorProbeEnv(key_color)
+    env.agent_dir = agent_dir
+    return env
+
+
+class GoToGoalProbeEnv(MiniGridEnv):
+    """A target object (e.g. green ball) and optionally distractors."""
+
+    def __init__(
+        self,
+        target_type: str = "ball",
+        target_color: str = "green",
+        target_pos: tuple[int, int] = (3, 1),
+        agent_pos: tuple[int, int] = (1, 1),
+        agent_dir: int = 0,
+        distractor: bool = True,
+    ) -> None:
+        self._target_type = target_type
+        self._target_color = target_color
+        self._target_pos = target_pos
+        self._agent_init_pos = agent_pos
+        self._agent_init_dir = agent_dir
+        self._distractor = distractor
+        super().__init__(
+            mission_space=MissionSpace(
+                mission_func=lambda: f"go to the {target_color} {target_type}"
+            ),
+            width=6,
+            height=5,
+            max_steps=32,
+        )
+
+    def _gen_grid(self, width: int, height: int) -> None:
+        from minigrid.core.world_object import Ball, Box
+
+        self.grid = Grid(width, height)
+        self.grid.wall_rect(0, 0, width, height)
+        self.agent_pos = self._agent_init_pos
+        self.agent_dir = self._agent_init_dir
+        if self._target_type == "ball":
+            self.put_obj(Ball(self._target_color), *self._target_pos)  # type: ignore[no-untyped-call]
+        else:
+            self.put_obj(Box(self._target_color), *self._target_pos)
+        if self._distractor:
+            self.put_obj(Box("yellow"), 2, 2)
+        self.mission = f"go to the {self._target_color} {self._target_type}"
+
+
+def make_goto_goal_probe_env(
+    target_type: str = "ball",
+    target_color: str = "green",
+    target_pos: tuple[int, int] = (3, 1),
+    agent_pos: tuple[int, int] = (1, 1),
+    agent_dir: int = 0,
+    distractor: bool = True,
+) -> GoToGoalProbeEnv:
+    return GoToGoalProbeEnv(
+        target_type=target_type,
+        target_color=target_color,
+        target_pos=target_pos,
+        agent_pos=agent_pos,
+        agent_dir=agent_dir,
+        distractor=distractor,
+    )
