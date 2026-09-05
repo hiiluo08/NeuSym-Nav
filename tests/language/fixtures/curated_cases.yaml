@@ -1,0 +1,268 @@
+# 40 Curated Instruction Cases for Task B-03
+# 12 GoTo supported paraphrases
+goto_supported:
+  - id: goto_01
+    instruction: "Go to the green ball."
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["green", "ball"]]]
+
+  - id: goto_02
+    instruction: "find the red box"
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["red", "box"]]]
+
+  - id: goto_03
+    instruction: "Move to a blue key."
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["blue", "key"]]]
+
+  - id: goto_04
+    instruction: "reach the yellow ball"
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["yellow", "ball"]]]
+
+  - id: goto_05
+    instruction: "Navigate to the purple box."
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["purple", "box"]]]
+
+  - id: goto_06
+    instruction: "walk to a grey key"
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["grey", "key"]]]
+
+  - id: goto_07
+    instruction: "Go to a red ball!"
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["red", "ball"]]]
+
+  - id: goto_08
+    instruction: "find the blue ball"
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["blue", "ball"]]]
+
+  - id: goto_09
+    instruction: "move to the yellow key."
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["yellow", "key"]]]
+
+  - id: goto_10
+    instruction: "reach a purple ball"
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["purple", "ball"]]]
+
+  - id: goto_11
+    instruction: "navigate to the grey box"
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["grey", "box"]]]
+
+  - id: goto_12
+    instruction: "walk to the green key."
+    expected_status: "deterministic"
+    family: "goto_type_color"
+    subgoals: [["goto-target", ["green", "key"]]]
+
+# 12 Key-Door supported paraphrases
+key_door_supported:
+  - id: kd_01
+    instruction: "pick up the yellow key, open the yellow door, then go to the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["yellow", "key"]]
+      - ["open-door", ["yellow", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_02
+    instruction: "get the red key, open the red door, then reach the goal."
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["red", "key"]]
+      - ["open-door", ["red", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_03
+    instruction: "grab the blue key, unlock the blue door, then move to the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["blue", "key"]]
+      - ["open-door", ["blue", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_04
+    instruction: "take the green key and then open the green door and then navigate to the goal."
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["green", "key"]]
+      - ["open-door", ["green", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_05
+    instruction: "collect the purple key, open the purple door, then reach the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["purple", "key"]]
+      - ["open-door", ["purple", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_06
+    instruction: "pick up a grey key, unlock a grey door, then go to the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["grey", "key"]]
+      - ["open-door", ["grey", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_07
+    instruction: "get a yellow key and open a yellow door then reach the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["yellow", "key"]]
+      - ["open-door", ["yellow", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_08
+    instruction: "grab a red key, open a red door, and then go to the goal."
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["red", "key"]]
+      - ["open-door", ["red", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_09
+    instruction: "take a blue key, unlock a blue door, then reach the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["blue", "key"]]
+      - ["open-door", ["blue", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_10
+    instruction: "collect a green key, open a green door, then move to the goal."
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["green", "key"]]
+      - ["open-door", ["green", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_11
+    instruction: "pick up the purple key and then unlock the purple door, then go to the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["purple", "key"]]
+      - ["open-door", ["purple", "door"]]
+      - ["reach-goal", []]
+
+  - id: kd_12
+    instruction: "get the grey key, open the grey door, then navigate to the goal"
+    expected_status: "deterministic"
+    family: "key_door_goal"
+    subgoals:
+      - ["pickup-key", ["grey", "key"]]
+      - ["open-door", ["grey", "door"]]
+      - ["reach-goal", []]
+
+# 8 Deliberately ambiguous cases
+ambiguous_cases:
+  - id: ambig_01
+    instruction: "Go to the key"
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_MISSING_COLOR"
+
+  - id: ambig_02
+    instruction: "find the ball."
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_MISSING_COLOR"
+
+  - id: ambig_03
+    instruction: "open the door"
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_MISSING_COLOR"
+
+  - id: ambig_04
+    instruction: "reach a box"
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_MISSING_COLOR"
+
+  - id: ambig_05
+    instruction: "Pick up the red key and the blue key"
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_MULTIPLE_HELD_OBJECTS"
+
+  - id: ambig_06
+    instruction: "get the green key and the yellow key then go to the goal"
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_MULTIPLE_HELD_OBJECTS"
+
+  - id: ambig_07
+    instruction: "Open the red door then open the blue door"
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_MULTIPLE_DOORS"
+
+  - id: ambig_08
+    instruction: "open the red door then pick up the red key"
+    expected_status: "ambiguous"
+    expected_reason: "AMBIGUOUS_ORDER_CONFLICT"
+
+# 8 Unsupported/malformed cases
+unsupported_cases:
+  - id: unsup_01
+    instruction: "Go to the object left of the yellow box."
+    expected_status: "unsupported"
+    expected_reason: "UNSUPPORTED_SPATIAL_RELATION"
+
+  - id: unsup_02
+    instruction: "find the ball near the blue door"
+    expected_status: "unsupported"
+    expected_reason: "UNSUPPORTED_SPATIAL_RELATION"
+
+  - id: unsup_03
+    instruction: "If you see a blue door, use it; otherwise use the red door."
+    expected_status: "unsupported"
+    expected_reason: "UNSUPPORTED_CONDITIONAL"
+
+  - id: unsup_04
+    instruction: "when you find the key, go to the goal"
+    expected_status: "unsupported"
+    expected_reason: "UNSUPPORTED_CONDITIONAL"
+
+  - id: unsup_05
+    instruction: "Put the green ball next to the box."
+    expected_status: "unsupported"
+    expected_reason: "UNSUPPORTED_SPATIAL_RELATION"
+
+  - id: unsup_06
+    instruction: "drop the key at the start"
+    expected_status: "unsupported"
+    expected_reason: "UNSUPPORTED_ACTION"
+
+  - id: unsup_07
+    instruction: "dance around the room"
+    expected_status: "unsupported"
+    expected_reason: "OUT_OF_GRAMMAR"
+
+  - id: unsup_08
+    instruction: ""
+    expected_status: "unsupported"
+    expected_reason: "EMPTY_INSTRUCTION"

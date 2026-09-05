@@ -149,6 +149,18 @@ class PlanResult:
     problem_hash: str | None
     reason: str | None
 
+@dataclass(frozen=True)
+class GoalProgram:
+    family: str
+    ordered_subgoals: tuple[GroundAtom, ...]
+
+@dataclass(frozen=True)
+class ParseResult:
+    status: ParseStatus
+    goal_program: GoalProgram | None
+    alternatives: tuple[GoalProgram, ...]
+    reason: str | None
+
 class EpisodeOutcome(StrEnum):
     SUCCESS = "success"
     UNSUPPORTED_INSTRUCTION = "unsupported_instruction"
